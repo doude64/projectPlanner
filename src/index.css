@@ -1,0 +1,322 @@
+:root {
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-card-border: rgba(255, 255, 255, 0.08);
+  --bg-card-hover: rgba(51, 65, 85, 0.8);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-secondary: #06b6d4;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  
+  --prio-high-bg: rgba(239, 68, 68, 0.15);
+  --prio-high-border: #ef4444;
+  --prio-high-text: #fca5a5;
+  
+  --prio-med-bg: rgba(245, 158, 11, 0.15);
+  --prio-med-border: #f59e0b;
+  --prio-med-text: #fcd34d;
+  
+  --prio-low-bg: rgba(16, 185, 129, 0.15);
+  --prio-low-border: #10b981;
+  --prio-low-text: #6ee7b7;
+
+  --role-admin-bg: rgba(168, 85, 247, 0.2);
+  --role-admin-text: #c084fc;
+  --role-editor-bg: rgba(59, 130, 246, 0.2);
+  --role-editor-text: #60a5fa;
+  --role-reader-bg: rgba(107, 114, 128, 0.2);
+  --role-reader-text: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Glassmorphic card utility */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.54);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.35);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+/* Form Inputs */
+.input-field {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Role Badges */
+.badge-role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.badge-role.admin { background: var(--role-admin-bg); color: var(--role-admin-text); border: 1px solid rgba(168, 85, 247, 0.3); }
+.badge-role.editor { background: var(--role-editor-bg); color: var(--role-editor-text); border: 1px solid rgba(59, 130, 246, 0.3); }
+.badge-role.reader { background: var(--role-reader-bg); color: var(--role-reader-text); border: 1px solid rgba(107, 114, 128, 0.3); }
+
+/* Priority Badges */
+.badge-priority {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.badge-priority.p1 { background: var(--prio-high-bg); color: var(--prio-high-text); border: 1px solid var(--prio-high-border); }
+.badge-priority.p2 { background: var(--prio-med-bg); color: var(--prio-med-text); border: 1px solid var(--prio-med-border); }
+.badge-priority.p3 { background: var(--prio-low-bg); color: var(--prio-low-text); border: 1px solid var(--prio-low-border); }
+
+/* Timeline Project Bar */
+.project-bar {
+  position: relative;
+  height: 48px;
+  min-width: 28px; /* Compact minimum width to allow small project bars */
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: visible;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, z-index 0.15s ease;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.project-bar:active {
+  cursor: grabbing;
+}
+
+.project-bar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border-color: rgba(99, 102, 241, 0.8);
+  z-index: 50 !important;
+}
+
+.project-bar.dragging {
+  opacity: 0.6;
+}
+
+/* High-contrast readable title styling */
+.project-title-text {
+  font-weight: 800;
+  font-size: 0.825rem;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: -0.01em;
+  background: rgba(15, 23, 42, 0.65);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Progress gauge inside project bar */
+.progress-gauge-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.progress-gauge-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.45) 0%, rgba(168, 85, 247, 0.55) 100%);
+  border-right: 2px solid var(--accent-secondary);
+}
+
+.progress-gauge-fill.high-progress {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.45) 0%, rgba(52, 211, 153, 0.55) 100%);
+  border-right-color: #34d399;
+}
+
+.progress-gauge-fill.mid-progress {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.45) 0%, rgba(251, 191, 36, 0.55) 100%);
+  border-right-color: #fbbf24;
+}
+
+.project-bar-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 0 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Drag Handles */
+.drag-handle-left, .drag-handle-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  z-index: 3;
+  cursor: col-resize;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.drag-handle-left { left: 0; border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.drag-handle-right { right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+.project-bar:hover .drag-handle-left,
+.project-bar:hover .drag-handle-right {
+  opacity: 1;
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
